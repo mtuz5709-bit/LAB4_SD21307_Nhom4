@@ -34,4 +34,19 @@ public class NguoiDungDAO implements CrudDAO<NguoiDung, Integer> {
         } catch(SQLException e) { throw new RuntimeException(e); }
         return null;
     }
+
+    // Lấy thông tin user qua email (Lab 4 - Bài 3)
+    public NguoiDung findByEmail(String email) {
+        NguoiDung user = null;
+        String sql = "SELECT * FROM nguoiDung WHERE email = ?";
+        try {
+            ResultSet rs = JdbcUtil.executeQuery(sql, email);
+            while (rs.next()) {
+                user = new NguoiDung(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

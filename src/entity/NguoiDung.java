@@ -97,4 +97,9 @@ public class NguoiDung {
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
     }
+
+    // Kiểm tra quyền quản lý (id_quyen == 1 là Quản lý) - theo chuẩn Slide Bài 4 (u.isRole())
+    public boolean isRole() {
+        return this.idQuyen == 1;
+    }
 }

@@ -34,4 +34,19 @@ public class DanhMucDAO implements CrudDAO<DanhMuc, Integer> {
         } catch(SQLException e) { throw new RuntimeException(e); }
         return null;
     }
+
+    // Đếm số lượng vật tư điện trong danh mục (kiểm tra khóa ngoại trước khi xóa - Lab 4 Bài 4)
+    public int countVatTuInDanhMuc(int idDanhMuc) {
+        int rs = 0;
+        String sql = "SELECT COUNT(id_vat_tu) AS num_vattu FROM vatTu WHERE id_danh_muc = ?";
+        try {
+            ResultSet resultSet = JdbcUtil.executeQuery(sql, idDanhMuc);
+            while (resultSet.next()) {
+                rs = resultSet.getInt("num_vattu");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
